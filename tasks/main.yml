@@ -1,0 +1,21 @@
+---
+  - name: Install nginx
+    apt:
+      name: nginx
+      state: present
+  - name: Copy etc files
+    copy:
+      src: files/etc
+      dest: /etc/
+  - name: Change hostname
+    hostname:
+      name: {{ elk_url }}
+  - name: Replace a localhost entry with our own
+    lineinfile:
+      path: /etc/hosts
+      regexp: '^127\.0\.0\.1'
+      line: 127.0.0.1 localhost {{ elk_url }}.localdomain {{ elk_url }} localhost
+      owner: root
+      group: root
+      mode: '0644'
+    become: yes
