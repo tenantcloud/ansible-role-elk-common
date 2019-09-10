@@ -13,3 +13,19 @@ Add this role name to playbook and run:
 
 ```cd /tmp/.ansible/ && ansible-playbook playbook-name.yml```
 
+-------
+
+Variable included in this role:
+
+{{ elk_url }} - url for ELK Stack server
+
+-------
+
+Sample playbook-name.yml
+
+- hosts: localhost
+  vars:
+    elk_url: https://elk.tc.cloud
+  become: yes
+  roles:
+    - ansible-role-elk-common
