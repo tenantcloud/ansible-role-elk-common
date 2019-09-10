@@ -1,31 +1,46 @@
-Ansible role for setup common ELK Stack tasks
+tenantcloud.ansible_role_elk_common
 =========
 
-Common ELK Stack role for install logstash patterns, change default nginx config file. This role include in default terraform scenario for auto-deploy new server.
+Ansible common role for setup nginx, change hostname. This role include in default terraform scenario for auto-deploy new server.
 
+Requirements
+------------
+
+ELK Stack, Elastalert, ReadOnlyRest
+
+Role Variables
+--------------
+
+elk_hostname: elk.tenants.co
+Hostname ELK Stack server
+
+Dependencies
+------------
+
+  - geerlingguy.java
+  - geerlingguy.elasticsearch
+  - geerlingguy.kibana
+  - geerlingguy.logstash
+  - tenantcloud.ansible_role_elastalert
+  - tenantcloud.ansible_role_auth_elk
+  - tenantcloud.ansible_role_readonlyrest
+
+Example Playbook
+----------------
+
+  - hosts: localhost
+    vars:
+      elk_hostname: elk.tenants.co
+    become: yes
+    roles:
+      - tenantcloud.ansible_role_elk_common
+
+License
 -------
 
-For manual installation this role:
+BSD
 
-```ansible-galaxy install tenantcloud.ansible_role_elk_common```
+Author Information
+------------------
 
-Add this role name to playbook and run:
-
-```cd /tmp/.ansible/ && ansible-playbook playbook-name.yml```
-
--------
-
-Variable included in this role:
-
-{{ elk_url }} - url for ELK Stack server
-
--------
-
-Sample playbook-name.yml
-
-- hosts: localhost
-  vars:
-    elk_url: https://elk.tc.cloud
-  become: yes
-  roles:
-    - ansible-role-elk-common
+TenantCloud DevOps Team
