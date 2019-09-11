@@ -28,12 +28,14 @@ Dependencies
 Example Playbook
 ----------------
 
+```yaml
   - hosts: localhost
     vars:
       elk_hostname: elk.tenants.co
     become: yes
     roles:
       - tenantcloud.ansible_role_elk_common
+```
 
 License
 -------
