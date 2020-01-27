@@ -9,7 +9,7 @@
       dest: /etc/
   - name: Change hostname
     hostname:
-      name: {{ elk_hostname }}
+      name: "{{ elk_hostname }}"
   - name: Replace a localhost entry with our own
     lineinfile:
       path: /etc/hosts
