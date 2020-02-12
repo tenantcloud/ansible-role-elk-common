@@ -1,21 +1,29 @@
 ---
-  - name: Install nginx
-    apt:
-      name: nginx
-      state: present
-  - name: Copy etc files
-    copy:
-      src: files/etc
-      dest: /etc/
-  - name: Change hostname
-    hostname:
-      name: "{{ elk_hostname }}"
-  - name: Replace a localhost entry with our own
-    lineinfile:
-      path: /etc/hosts
-      regexp: '^127\.0\.0\.1'
-      line: 127.0.0.1 localhost {{ elk_hostname }}.localdomain {{ elk_hostname }} localhost
-      owner: root
-      group: root
-      mode: '0644'
-    become: yes
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Copy etc files
+  copy:
+    src: files/etc
+    dest: /etc/
+- name: Change hostname
+  hostname:
+    name: "{{ elk_hostname }}"
+
+- name: Replace a localhost entry with our own
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.0\.1'
+    line: 127.0.0.1 localhost {{ elk_hostname }}.localdomain {{ elk_hostname }}
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: Increase maximum shards
+  uri:
+    url: "http://127.0.0.1:9200/_cluster/settings"
+    method: PUT
+    body: '{ "persistent": { "cluster.max_shards_per_node": "30000" } }'
