@@ -3,6 +3,13 @@ tenantcloud.ansible_role_elk_common
 
 Ansible common role for setup nginx, change hostname. This role include in default terraform scenario for auto-deploy new server.
 
+To increase maximum shards insert next code in Dev Tools in Kibana:
+```bash
+PUT _cluster/settings 
+{ "persistent": { "cluster.max_shards_per_node": "30000" } }
+``` 
+
+
 Requirements
 ------------
 
