@@ -1,4 +1,7 @@
-tenantcloud.ansible_role_elk_common
+
+![Lint Ansible Roles](https://github.com/tenantcloud/ansible-role-elk-common/workflows/Lint%20Ansible%20Roles/badge.svg)
+
+tenantcloud.elk_common
 =========
 
 Ansible common role for setup nginx, change hostname. This role include in default terraform scenario for auto-deploy new server.
@@ -25,9 +28,9 @@ Dependencies
 ------------
 
   - geerlingguy.java
-  - geerlingguy.elasticsearch
-  - geerlingguy.kibana
-  - geerlingguy.logstash
+  - tenantcloud.elasticsearch
+  - tenantcloud.kibana
+  - tenantcloud.logstash
   - tenantcloud.ansible_role_elastalert
   - tenantcloud.ansible_role_auth_elk
   - tenantcloud.ansible_role_readonlyrest
@@ -41,7 +44,7 @@ Example Playbook
       elk_hostname: elk.tenants.co
     become: yes
     roles:
-      - tenantcloud.ansible_role_elk_common
+      - tenantcloud.elk_common
 ```
 
 License
