@@ -8,6 +8,8 @@
   copy:
     src: files/etc
     dest: /etc/
+    mode: '0644'
+
 - name: Change hostname
   hostname:
     name: "{{ elk_hostname }}"
